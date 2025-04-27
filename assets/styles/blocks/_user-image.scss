@@ -1,0 +1,12 @@
+@use '../helpers' as *;
+
+.user-image {
+    @include square(rem(40));
+    background-color: #F9DFC0;
+    border-radius: rem(6);
+
+    &--alt{
+        border-radius: 50%;
+        background: none;
+    }
+}

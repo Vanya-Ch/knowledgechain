@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <script src="../assets/scripts/header.js" defer></script>
+    <script src="../assets/scripts/myPosts.js" defer></script>
+    <title>Knowledgechain | My Posts</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__content container">
+            <a href="/home" class="header__logo logo">
+                <div class="logo__title">
+                    <div class="logo__logo">
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path
+                                d="M5.55866 14.0086C5.39479 14.0086 5.26071 13.9626 5.15642 13.8705C5.05214 13.7784 5 13.66 5 13.5154V0.493261C5 0.348571 5.05214 0.230189 5.15642 0.138113C5.26071 0.0460377 5.39479 0 5.55866 0H8.41899C8.58287 0 8.71695 0.0460377 8.82123 0.138113C8.92551 0.230189 8.97765 0.348571 8.97765 0.493261V4.89315C9.37989 4.48539 9.87151 4.16313 10.4525 3.92636C11.0484 3.67644 11.7337 3.55148 12.5084 3.55148C13.3724 3.55148 14.1397 3.72248 14.8101 4.06447C15.4953 4.40647 16.0317 4.91288 16.419 5.58372C16.8063 6.2414 17 7.05035 17 8.01056V13.5154C17 13.66 16.9479 13.7784 16.8436 13.8705C16.7393 13.9626 16.6052 14.0086 16.4413 14.0086H13.5587C13.4097 14.0086 13.2756 13.9626 13.1564 13.8705C13.0521 13.7784 13 13.66 13 13.5154V8.12895C13 7.51073 12.8287 7.0372 12.486 6.70835C12.1583 6.36636 11.6667 6.19536 11.0112 6.19536C10.4004 6.19536 9.90875 6.36636 9.53631 6.70835C9.16387 7.0372 8.97765 7.51073 8.97765 8.12895V13.5154C8.97765 13.66 8.92551 13.7784 8.82123 13.8705C8.71695 13.9626 8.58287 14.0086 8.41899 14.0086H5.55866Z"
+                                fill="#1E252B" />
+                            <path d="M19 16.5101C16.6988 18.7291 14.5 20 11 20C7.71377 20 5.08988 18.5253 3 16.5101"
+                                stroke="#1E252B" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h1 class="logo__title-text hidden-tablet">Knowledgechain</h1>
+                </div>
+            </a>
+            <div class="header__overlay" data-js-overlay>
+                <nav class="header__navigation navigation">
+                    <ul class="header__navigation-list">
+                        <a href="/home" class="header__navigation-link">
+                            <div class="header__navigation-item">
+                                <svg class="hidden-tablet" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M19.3441 7.5198L10.8801 0.339514C10.639 0.121018 10.3253 0 9.99994 0C9.67458 0 9.36086 0.121018 9.11979 0.339514L0.656695 7.5199C0.450039 7.70713 0.284879 7.93555 0.171844 8.19047C0.0588099 8.44538 0.000407589 8.72115 0.000396729 9L0.000396729 19.3357C0.000396727 19.5119 0.0703692 19.6808 0.194928 19.8054C0.319487 19.93 0.488434 20 0.6646 20L6.0004 20C6.55268 20 7.0004 19.5523 7.0004 19V15C7.0004 14.436 7.55249 13.9788 8.11669 13.9788H11.8832C12.4475 13.9788 13.0004 14.436 13.0004 15V19C13.0004 19.5523 13.4481 20 14.0004 20H19.3362C19.5124 20 19.6813 19.93 19.8059 19.8054C19.9304 19.6808 20.0004 19.5119 20.0004 19.3357V9C20.0004 8.72114 19.9419 8.44537 19.8289 8.19044C19.7159 7.93551 19.5507 7.70707 19.3441 7.5198Z"
+                                        fill="white" />
+                                </svg>
+                                <span class="visible-tablet">Home</span>
+                            </div>
+                        </a>
+                        <a href="/liked" class="header__navigation-link">
+                            <div class="header__navigation-item">
+                                <svg class="hidden-tablet" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M4.28472 0.286348C0.582052 1.41945 -0.738149 5.24881 0.391497 8.59912C2.20862 13.9716 10.0014 18 10.0014 18C10.0014 18 17.8521 13.9096 19.6102 8.59912C20.7388 5.24881 19.4102 1.41945 15.7075 0.286348C13.762 -0.306707 11.5332 0.0733286 10.0014 1.19843C8.38219 0.0413257 6.23239 -0.310707 4.28472 0.286348ZM13.7574 3.27342C13.3561 3.17072 12.9476 3.41276 12.8448 3.81404C12.7421 4.21532 12.9842 4.62388 13.3855 4.72658C14.768 5.08042 15.5877 6.00903 15.6825 6.93366C15.7247 7.34572 16.093 7.64549 16.5051 7.60323C16.9171 7.56097 17.2169 7.19267 17.1747 6.78062C16.9982 5.06045 15.5644 3.73591 13.7574 3.27342Z"
+                                        fill="#C5D0E6" />
+                                </svg>
+                                <span class="visible-tablet">Liked</span>
+                            </div>
+                        </a>
+                        <a href="/create" class="header__navigation-link">
+                            <div class="header__navigation-item">
+                                Create Post
+                            </div>
+                        </a>
+                        <a href="/myPosts" class="header__navigation-link">
+                            <div class="header__navigation-item">
+                                My Posts
+                            </div>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+            <button class="header__burger-button burger-button visible-tablet" type="button" aria-label="Open menu"
+                title="Open menu" data-js-burger-button>
+                <span class="burger-button__line"></span>
+                <span class="burger-button__line"></span>
+                <span class="burger-button__line"></span>
+            </button>
+            <div class="header__user user" data-js-user-avatar>
+                <img class="header__user-image user-image" width="40" height="40" loading="lazy" alt="avatar">
+                <div class="header__user-username">AR. Jakir</div>
+                <div class="user__settings visually-hidden" data-js-user-form>
+                    <div class="user__settings-bg" data-js-user-form-bg>
+                        <form class="user__form" enctype="multipart/form-data">
+                            <label for="avatar-input">
+                                <div class="user__form-file">
+                                    <div class="user__form-file-label">Choose your avatar</div>
+                                    <div class="user__form-file-button button">Upload</div>
+                                </div>
+                            </label>
+                            <input id="avatar-input" class="user__image-input" type="file">
+                            <div class="user__buttons">
+                                <button class="user__log-out button" type="button">Log Out</button>
+                                <button class="user__confirm button">Confirm Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-main">
+            <div class="section-main__content container">
+                <div class="topics">
+                    <div class="topics__heading">
+                        <input class="topics__search" type="text" placeholder="Search...">
+                    </div>
+
+                </div>
+
+                <div class="right-side">
+                    <div class="right-side__block">
+                        <h3 class="right-side__block-title"><span class="icon icon--white-arrow">Meetups</span></h3>
+                        <div class="right-side__block-content ">
+                            <div class="right-side__block-date">
+                                <p class="right-side__block-month">Feb</p>
+                                <p class="right-side__block-day">5</p>
+                            </div>
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme">UIHUT - Crunchbase Company Profile...</h4>
+                                <p class="right-side__block-location">
+                                    <img class="right-side__block-img" src="../assets/icons/icon1.jpg" width="16"
+                                        height="16" loading="lazy" alt="">
+                                    UIHUT • Sylhet, Bangladesh
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <div class="right-side__block-date">
+                                <p class="right-side__block-month">Feb</p>
+                                <p class="right-side__block-day">3</p>
+                            </div>
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme">Design Meetups USA | Dribbble</h4>
+                                <p class="right-side__block-location">
+                                    <img class="right-side__block-img" src="../assets/icons/icon2.jpg" width="16"
+                                        height="16" loading="lazy" alt="">
+                                    Dribbble • Austin, Texas, USA
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <div class="right-side__block-date">
+                                <p class="right-side__block-month">Feb</p>
+                                <p class="right-side__block-day">7</p>
+                            </div>
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme">Meetup Brand Identity Design - Beha...</h4>
+                                <p class="right-side__block-location">
+                                    <img class="right-side__block-img" src="../assets/icons/icon3.jpg" width="16"
+                                        height="16" loading="lazy" alt="">
+                                    Behance • Sab jose, Califonia, USA
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-side__block">
+                        <h3 class="right-side__block-title"><span class="icon icon--white-arrow">Podcasts</span>
+                        </h3>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod1.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod2.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod3.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod4.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod5.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right-side__block-content ">
+                            <img class="right-side__block-podcast-img" width="58" height="58" loading="lazy"
+                                src="../assets/images/pod6.jpg" alt="">
+                            <div class="right-side__block-info">
+                                <h4 class="right-side__block-theme--pod"><span class="icon icon--gray-arrow">Selling
+                                        a Business and Scaling Another Amidst Tragedy.</span></h4>
+                                <p class="right-side__block-location">
+                                    by Michele Hansen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    
+</body>
+
+</html>

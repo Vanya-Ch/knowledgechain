@@ -1,0 +1,92 @@
+@use '../helpers' as *;
+
+.right-side{
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    row-gap: rem(20);
+
+    @include tablet{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    @include mobile{
+        flex-direction: column;
+    }
+    &__block{
+        max-width: rem(325);
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(20);
+        padding: rem(20);
+        background-color: var(--color-blocks-bg);
+        border-radius: rem(16);
+
+        @include mobile{
+            max-width: none;
+        }
+
+        &-content{
+            display: flex;
+            column-gap: rem(14);
+
+            @include hover{
+                cursor: pointer;
+            }
+        }
+
+        &-date{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: rem(6);
+            padding: rem(5);
+            background-color: var(--color-date-bg);
+        }
+
+        &-month{
+            color: var(--color-light);
+        }
+
+        &-day{
+            font-weight: 600;
+            font-size: rem(26);
+            color: var(--color-day);
+        }
+
+        &-info{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: start;
+
+            
+        }
+
+        &-theme{
+            font-size: rem(16);
+
+            &--pod{
+                font-size: rem(12);
+            }
+        }
+
+        &-location{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: rem(6);
+            font-size: rem(12);
+        }
+
+        &-img{
+            border-radius: 50%;
+        }
+
+        &-podcast-img{
+            border-radius: rem(4);
+        }
+    }
+}

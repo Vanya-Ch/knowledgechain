@@ -1,0 +1,100 @@
+@use '../helpers' as *;
+
+.topic {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(20);
+
+    & label {
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(10);
+    }
+
+    &__title {
+        color: var(--color-light);
+
+        &-input {
+            background-color: var(--color-date-bg);
+            border-radius: rem(6);
+            border: transparent;
+            padding: rem(10) rem(20);
+            color: var(--color-light);
+        }
+    }
+
+    &__text {
+        color: var(--color-light);
+
+        &-textarea {
+            width: 100%;
+            background-color: var(--color-date-bg);
+            border-radius: rem(6);
+            border: transparent;
+            height: rem(127);
+            resize: vertical;
+            padding: rem(10) rem(20);
+            color: var(--color-light);
+        }
+    }
+
+    &__checkbox {
+        max-width: rem(325);
+
+        &-icon {
+            @include square(rem(30));
+            position: relative;
+            background-color: var(--color-light);
+            border-radius: rem(6);
+            transition-duration: var(--transition-duration);
+
+            &::after {
+                content: '✔';
+                display: none;
+                @include abs-center;
+                color: var(-color-green);
+            }
+        }
+
+        &-button:checked+.topic__checkbox-icon::after {
+            display: block;
+        }
+    }
+
+    &__submit-button {
+        max-width: rem(200);
+        background-color: var(--color-date-bg);
+
+        @include hover {
+            color: var(--color-green);
+            border: rem(1) solid var(--color-green);
+        }
+    }
+
+    &__image {
+
+        &-button {
+            width: rem(200);
+            background-color: var(--color-date-bg);
+        }
+    }
+
+    &__comment-create {
+        padding: rem(20);
+        width: 100%;
+        border-radius: rem(16);
+        background-color: var(--color-blocks-bg);
+    }
+
+    &__textarea{
+        color: var(--color-light);
+        width: 100%;
+        resize: vertical;
+        padding: rem(20);
+        background-color:var(--color-date-bg);
+        border-radius: rem(16);
+        border: none;
+        height: rem(150);
+    }
+
+}

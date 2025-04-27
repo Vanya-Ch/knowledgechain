@@ -1,0 +1,20 @@
+@use '../helpers' as *;
+
+.topics{
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(20);
+
+    &__heading{
+        width: 100%;
+    }
+
+    &__search{
+        width: 100%;
+        color: var(--color-light);
+        background-color: var(--color-date-bg);
+        border-radius: rem(6);
+        padding: rem(5) rem(10);
+        border: none;
+    }
+}

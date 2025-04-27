@@ -1,0 +1,27 @@
+@use 'normalize';
+@use 'fonts';
+@use 'variables';
+@use 'utils';
+@use 'globals';
+
+@use './blocks/section-forms';
+@use './blocks/button';
+@use './blocks/form';
+@use './blocks/input';
+@use './blocks/icon';
+
+@use './blocks/header';
+@use './blocks/logo';
+@use './blocks/burger-button';
+@use './blocks/user';
+@use './blocks/section';
+@use './blocks/right-side';
+@use './blocks/left-side';
+@use './blocks/topic';
+@use './blocks/topics';
+@use './blocks/card';
+@use './blocks/badge';
+@use './blocks/pagination';
+@use './blocks/comment';
+@use './blocks/user-image';
+@use './blocks/delete-button';

@@ -1,0 +1,33 @@
+@use '../helpers' as *;
+
+.form{
+    display: grid;
+    row-gap: rem(20);
+
+
+    &--accent{
+        color: var(--color-light);
+        font-weight: 600;
+        transition-duration: var(--transition-duration);
+        
+        @include hover{
+            color: var(--color-accent);
+            cursor: pointer;
+        };
+    }
+    
+    &__input{
+        padding: rem(10) rem(16);
+        border-radius: rem(8);
+        font-size: rem(16);
+        color: var(--color-dark);
+    }
+
+    &__subtitle{
+        font-size: rem(12);
+    }
+
+    &:last-child{
+        padding-top: rem(10);
+    }
+}

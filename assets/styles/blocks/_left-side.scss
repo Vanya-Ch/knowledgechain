@@ -1,0 +1,20 @@
+@use '../helpers' as *;
+
+.left-side{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: max-content;
+    padding: rem(20);
+    row-gap: rem(20);
+    border-radius: rem(16);
+    background-color: var(--color-blocks-bg);
+
+    &__title{
+        @include fluid-text(42,32)
+    }
+
+    @include mobile-s{
+        max-width: fluid(420, 325);
+    }
+}

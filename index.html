@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+    <script src="assets/scripts/registrationAndLogin.js" defer></script>
+    <title>Knowledgechain | Вхід та реєстрація</title>
+</head>
+
+<body>
+    <section class="section-forms container" aria-labelledby="section-forms-title">
+        <div class="section-forms__content ">
+            <h1 class="section-forms__title" id="section-forms-title">Knowledgechain</h1>
+
+            <div class="section-forms__tab-buttons" data-js-tab-buttons>
+                <button class="button button-active" data-js-login-btn>Увійти</button>
+                <button class="button" data-js-register-btn>Реєстрація</button>
+            </div>
+
+            <form class="section-forms__form form" data-js-login-form>
+                <input class="form__input" type="text" data-js-login-username placeholder="Login" required>
+                <input class="form__input" type="password" data-js-login-password placeholder="Password" required>
+                <button class="button button--purple-button" type="submit">Увійти</button>
+            </form>
+
+            <form class="section-forms__form form visually-hidden" data-js-register-form>
+                <input class="form__input" type="text" data-js-register-login placeholder="Login" minlength="6" required>
+                <input class="form__input" type="text" data-js-register-name placeholder="Username" required>
+                <input class="form__input" type="password" data-js-register-password placeholder="Password" required>
+                <input class="form__input" type="password" data-js-register-confirm placeholder="Confirm password" required>
+                <div class="error visually-hidden" data-js-password-error>Паролі не співпадають</div>
+                <button class="button" type="submit">Create Account</button>
+                <div class="form__subtitle">By clicking “Create Account” you agree to our
+                    <span class="form--accent">terms</span> and <span class="form--accent">privacy policy</span>.
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

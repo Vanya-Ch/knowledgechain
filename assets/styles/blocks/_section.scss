@@ -1,0 +1,17 @@
+@use '../helpers' as *;
+
+.section{
+
+    &-main{
+        &__content{
+            display: grid;
+            grid-template-columns: 1fr auto;
+            column-gap: rem(20);
+            row-gap: rem(20);
+
+            @include tablet{
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

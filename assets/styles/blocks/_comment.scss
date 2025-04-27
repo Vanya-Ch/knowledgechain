@@ -1,0 +1,43 @@
+@use '../helpers' as *;
+
+.comment {
+    display: flex;
+    column-gap: rem(20);
+    padding: rem(20);
+    width: 100%;
+    border-radius: rem(16);
+    background-color: var(--color-blocks-bg);
+    color: var(--color-light);
+    align-items: center;
+
+    &__button {
+        @include hover{
+            border-color: var(--color-green);
+            color: var(--color-green);
+        }
+    }
+
+    &__inner{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: rem(12);
+        padding: rem(20);
+        width: 100%;
+        background-color: var(--color-date-bg);
+    }
+
+    &__date{
+        color: var(--color-gray-50);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: rem(20);
+    }
+}
+
+.comments-section{
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(20);
+}

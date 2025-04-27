@@ -1,0 +1,22 @@
+@use '../helpers' as *;
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: rem(8);
+    margin: rem(20) 0;
+
+    & button{
+        padding: rem(6) rem(12);
+        border: none;
+        background: var(--color-light);
+        border-radius: rem(5);
+        cursor: pointer;
+        transition-duration: var(--transition-duration);
+        &.active,
+        &:hover{
+            background: var(--color-pagination-active);
+            color: var(--color-light);
+        }
+    }
+}
