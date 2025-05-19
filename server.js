@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/home.html'));
 });
 
-app.get('/create', (req, res) => {
+app.get('/create', auth, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/create-post.html'));
 });
 
