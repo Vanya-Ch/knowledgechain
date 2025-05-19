@@ -482,6 +482,10 @@ button[aria-label]::before {
   content: "";
 }
 
+#editor {
+  position: static;
+}
+
 .section-forms {
   position: absolute;
   top: 50%;
@@ -1330,6 +1334,9 @@ button[aria-label]::before {
 }
 
 .delete-topic-button, .delete-comment-button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: flex;
   align-items: center;
   background-color: var(--color-date-bg);

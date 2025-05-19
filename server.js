@@ -40,11 +40,11 @@ app.listen(PORT, (err) => {
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));  
 
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/home.html'));
 });
 

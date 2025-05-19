@@ -56,7 +56,7 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const topics = await Topic.find()
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: 1 })
       .populate('author', 'username avatarUrl');
     res.json(topics);
   } catch (err) {
@@ -70,7 +70,7 @@ router.get('/myPosts', auth, async (req, res) => {
 
     const topics = await Topic.find({ author: userId })
       .populate('author', 'username avatarUrl')
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: 1 });
 
 
     res.json(topics);
@@ -126,7 +126,7 @@ router.post('/liked',auth, async (req, res) => {
 
     const topics = await Topic.find({ _id: { $in: ids } })
       .populate('author', 'username avatarUrl')
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: 1 });
 
     res.json(topics);
   } catch (err) {

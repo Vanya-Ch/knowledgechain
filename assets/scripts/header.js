@@ -67,7 +67,7 @@ document.querySelector('.user__log-out')?.addEventListener('click', async () => 
     });
 
     if (res.ok) {
-      window.location.href = '/'; // перенаправлення на головну
+      window.location.href = '/login'; // перенаправлення на головну
     } else {
       console.error('Logout failed');
     }
@@ -78,26 +78,34 @@ document.querySelector('.user__log-out')?.addEventListener('click', async () => 
 
 //avatar reset
 document.addEventListener('DOMContentLoaded', async () => {
+  const userContainer = document.querySelector('[data-js-user-avatar]');
+
   try {
-      const res = await fetch('/api/user/me', {
-          method: 'GET',
-          credentials: 'include'
-      });
+    const res = await fetch('/api/user/me', {
+      method: 'GET',
+      credentials: 'include'
+    });
 
-      if (!res.ok) throw new Error('User not authenticated');
+    if (!res.ok) throw new Error('User not authenticated');
 
-      const user = await res.json();
+    const user = await res.json();
 
-      const avatarImg = document.querySelector('[data-js-user-avatar] img');
-      const usernameDiv = document.querySelector('.header__user-username');
+    const avatarImg = userContainer.querySelector('img');
+    const usernameDiv = userContainer.querySelector('.header__user-username');
 
-      if (avatarImg && user.avatarUrl) {
-          avatarImg.src = user.avatarUrl;
-      }
+    if (avatarImg && user.avatarUrl) {
+      avatarImg.src = user.avatarUrl;
+    }
 
-      usernameDiv.textContent = user.username;
+    usernameDiv.textContent = user.username;
 
   } catch (err) {
-      console.error('Error loading user info:', err);
+    console.warn('Not authenticated — showing login button');
+
+    userContainer.innerHTML = `
+      <button class="button" onclick="window.location.href='/login'">
+        Авторизуватись
+      </button>
+    `;
   }
 });

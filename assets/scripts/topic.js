@@ -97,12 +97,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             </form>
         ` : `
             <div class="not-auth-comment">
-                <p>You must <a href="/">log in</a> to comment.</p>
+                <p>You must <a href="/login">log in</a> to comment.</p>
             </div>
         `}
 
         <div class="comments-section">
-            ${comments.length ? comments.map(comment => renderComment(comment, user)).join('') : '<p>Коментарів поки немає</p>'}
+            ${comments.length ? comments.map(comment => renderComment(comment, user)).join('') : '<p>Here no comments yet</p>'}
         </div>
     `;
 

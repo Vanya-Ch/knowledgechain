@@ -32,7 +32,7 @@ const loginBtn = document.querySelector('[data-js-login-btn]');
             const data = await res.json();
             if (res.ok) {
                 alert('Вхід успішний!');
-                window.location.href = '/home';
+                window.location.href = '/';
             } else {
                 alert(data.message || 'Помилка входу');
             }
@@ -62,7 +62,7 @@ const loginBtn = document.querySelector('[data-js-login-btn]');
             const data = await res.json();
             if (res.ok) {
                 alert('Реєстрація успішна!');
-                window.location.href = '/home';
+                window.location.href = '/';
             } else {
                 alert(data.message || 'Помилка реєстрації');
             }

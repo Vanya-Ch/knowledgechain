@@ -4,6 +4,7 @@
 
     &-topic-button,
     &-comment-button {
+        width: fit-content;
         display: flex;
         align-items: center;
         background-color: var(--color-date-bg);
