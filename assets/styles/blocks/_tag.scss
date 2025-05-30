@@ -1,0 +1,9 @@
+@use '../helpers' as *;
+
+.tag{
+    padding: rem(5);
+    border-radius: rem(10);
+    border: rem(1) solid var(--color-light);
+    background-color: var(--color-header-outline);
+    color: var(--color-light);
+}

@@ -19,3 +19,20 @@
         }
     }
 }
+
+.edit-topic-button
+ {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-date-bg);
+    border: rem(1) solid var(--color-blocks-bg);
+    border-radius: rem(6);
+    padding: rem(8);
+    transition-duration: var(--transition-duration);
+
+    @include hover {
+        border-color: var(--color-red);
+        color: var(--color-red);
+    }
+}

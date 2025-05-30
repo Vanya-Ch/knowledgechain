@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   likedTopics: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Topic' }],
   likedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   createdTopics: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Topic' }],
-  avatarUrl: { type: String, default: '../assets/images/default-avatar.png' }
+  avatarUrl: { type: String, default: '../assets/images/default-avatar.png' },
+  isBanned: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('User', userSchema);

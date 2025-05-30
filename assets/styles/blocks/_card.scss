@@ -44,7 +44,10 @@
         flex-direction: column;
         justify-content: space-between;
         row-gap: rem(20);
-
+        
+        &  p{
+            color: var(--color-light);
+        }
     }
 
     &__like{
@@ -95,5 +98,16 @@
                 grid-area: username;
             }
         }
+    }
+    &__edit-buttons{
+        display: flex;
+        gap: rem(10);
+    }
+
+    &__tags{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: rem(5);
     }
 }

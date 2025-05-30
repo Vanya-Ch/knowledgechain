@@ -117,3 +117,11 @@ button{
 #editor{
     position: static;
 }
+
+tags{
+    margin-top: rem(10);
+
+    &::placeholder{
+        color: gray;
+    }
+}

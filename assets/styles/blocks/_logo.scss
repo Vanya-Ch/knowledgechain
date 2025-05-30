@@ -29,7 +29,7 @@
     }
 
     &__title-text{
-        font-size: fluid-text(40, 26);
+        @include fluid-text(42, 22);
         transition-duration: var(--transition-duration);
     }
 }

@@ -40,6 +40,7 @@
 
     &__checkbox {
         max-width: rem(325);
+        padding-bottom: rem(5);
 
         &-icon {
             @include square(rem(30));

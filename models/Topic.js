@@ -7,7 +7,8 @@ const topicSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   imageUrl: { type: String, default: '' },
-  needHelp: { type: Boolean, default: false }
+  needHelp: { type: Boolean, default: false },
+  tags: [{ type: String }] 
 });
 
 module.exports = mongoose.model('Topic', topicSchema);

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/styles/main.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify" defer></script>
     <script src="../assets/scripts/header.js" defer></script>
     <script src="../assets/scripts/create.js" defer></script>
     <title>Knowledgechain | Create post</title>
@@ -108,6 +110,10 @@
                                 <input class="topic__title-input" placeholder="Bitcoin price go crazy..." type="text"
                                     data-js-topic-title>
                             </label>
+                            <label class="topic__tags">
+                                Add tags(split tags with ",")
+                                <input id="topic-tags" name="tags" placeholder="Enter tags..." autofocus>
+                            </label>
                             <label class="topic__text">
                                 Content
                                 <div id="editor" class="topic__text-textarea" style="height: 200px;"></div>
@@ -123,6 +129,7 @@
                                 <div class="topic__image-file">
                                     <div class="topic__image-label">Choose your topic image(optional)</div>
                                     <div class="topic__image-button button">Upload</div>
+                                    <div class="topic__filename" data-js-filename></div>
                                 </div>
                             </label>
 

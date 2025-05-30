@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const topicsContainer = document.querySelector('.topics');
     const heading = document.querySelector('.topics__heading');
     const searchInput = document.querySelector('.topics__search');
+    const tagFilterInput = document.getElementById('tag-filter');
+    const tagFilter = new Tagify(tagFilterInput);
+
+    // Завантажити всі теги
+    fetch('/api/tags')
+        .then(res => res.json())
+        .then(tags => tagFilter.settings.whitelist = tags);
 
     const TOPICS_PER_PAGE = 10;
     let allTopics = [];
@@ -52,9 +59,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const renderTopics = () => {
         document.querySelectorAll('.card-link.card').forEach(el => el.remove());
 
-        const filteredTopics = allTopics.filter(topic =>
-            topic.title.toLowerCase().includes(searchInput.value.trim().toLowerCase())
-        );
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        const selectedTags = tagFilter.value.map(tag => tag.value);
+
+        const filteredTopics = allTopics.filter(topic => {
+            const matchesTitle = topic.title.toLowerCase().includes(searchQuery);
+            const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => topic.tags.includes(tag));
+            return matchesTitle && matchesTags;
+        });
 
         const totalPages = Math.ceil(filteredTopics.length / TOPICS_PER_PAGE);
         const start = (currentPage - 1) * TOPICS_PER_PAGE;
@@ -73,7 +85,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isAuthor = String(topic.author._id) === String(currentUserId);
             const isAdmin = currentUserRole === 'admin';
 
-            console.log({ isLiked, isAuthor, isAdmin, topicAuthor: topic.author._id, currentUserId });
 
             card.innerHTML = `
                 <img class="card__image" src="${topic.imageUrl || '../assets/images/default-topic.jpg'}" alt="topic card">
@@ -100,6 +111,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <span class="like-count">${topic.likes.length}</span>
                         </button>
                     </h2>
+                    <div class="card__tags">
+                        ${topic.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
                     <div class="card__creator-info">
                         <img src="${topic.author.avatarUrl}" alt="creator avatar" class="card__creator-avatar">
                         <p class="card__creator-username">${topic.author.username}</p>
@@ -180,6 +194,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentPage = 1;
         renderTopics();
     });
+
+    tagFilter.on('change', () => {
+        currentPage = 1;
+        renderTopics();
+    });
+
 
     try {
         await fetchCurrentUser();

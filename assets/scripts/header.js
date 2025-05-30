@@ -27,10 +27,26 @@ burgerButton.addEventListener('click', () => {
 
 })
 
+avatar.addEventListener('click', () => {
+  avatarForm.classList.remove('visually-hidden');
+
+  const avatarInput = document.getElementById('avatar-input');
+  const fileNameDiv = document.querySelector('.user__form-file-new-avatar');
+
+  if (avatarInput && fileNameDiv && !avatarInput.dataset.listenerAdded) {
+    avatarInput.addEventListener('change', function () {
+      const file = this.files[0];
+      fileNameDiv.textContent = file ? file.name : '';
+    });
+    avatarInput.dataset.listenerAdded = 'true';
+  }
+});
+
 document.querySelector('.user__form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const fileInput = document.getElementById('avatar-input');
+  console.log(fileInput)
   const file = fileInput.files[0];
 
   if (!file) return;

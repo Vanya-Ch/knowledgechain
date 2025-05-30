@@ -1,0 +1,10 @@
+@use '../helpers' as *;
+
+.search {
+    width: 100%;
+    color: var(--color-light);
+    background-color: var(--color-date-bg);
+    border-radius: rem(6);
+    padding: rem(5) rem(10);
+    border: none;
+}

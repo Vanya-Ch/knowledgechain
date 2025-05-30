@@ -7,6 +7,7 @@ const avatarRoutes = require('./routes/user.js')
 const topicRoutes = require('./routes/topic.js');
 const commentRoutes = require('./routes/comment.js');
 const auth = require('./middleware/auth.js')
+const checkBan = require('./middleware/checkBan.js');
 
 const app = express();
 
@@ -48,18 +49,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/home.html'));
 });
 
-app.get('/create', auth, (req, res) => {
+app.get('/create', auth, checkBan, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/create-post.html'));
 });
 
-app.get('/topic', (req, res) => {
+app.get('/topic', checkBan, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/topic.html'));
 });
 
-app.get('/liked', auth, (req, res) => {
+app.get('/liked', auth, checkBan, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/liked.html'));
 });
 
-app.get('/myPosts', auth, (req, res) => {
+app.get('/myPosts', auth, checkBan, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/my-posts.html'));
+});
+
+app.get('/users', auth, checkBan, (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages/users.html'));
 });

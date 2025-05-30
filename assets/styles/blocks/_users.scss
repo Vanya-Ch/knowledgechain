@@ -1,0 +1,33 @@
+@use '../helpers' as *;
+
+.users {
+    &__list {
+        padding-block: rem(20);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: rem(20);
+    }
+
+    &-item {
+        padding: rem(10);
+        border: rem(1) solid var(--color-light);
+        border-radius: rem(20);
+        background-color: var(--color-blocks-bg);
+        color: var(--color-light);
+
+        & button {
+            background-color: var(--color-dark-15);
+            border-radius: rem(20);
+            border: none;
+            padding: rem(10) rem(15);
+            margin-block: rem(10);
+            color: var(--color-light);
+            transition-duration: var(--transition-duration);
+
+            &:hover {
+                background-color: var(--color-dark-20);
+                color: var(--color-accent);
+            }
+        }
+    }
+}

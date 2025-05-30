@@ -1,0 +1,29 @@
+@use '../helpers' as *;
+
+.tagify {
+    flex-wrap: wrap;
+    border: none !important;
+    background-color: var(--color-date-bg);
+    border-radius: rem(6);
+
+    &__input {
+        flex: 1 1 auto;
+        min-width: 100px;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+
+    }
+
+    &__tag {
+        max-width: 100%;
+        word-break: break-word;
+        white-space: normal;
+        background-color: var(--tag-bg);
+
+        &:hover {
+            background-color: var(--tag-hover);
+        }
+    }
+}

@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderComment(comment, user) {
         const authorId = comment.author.userId || comment.author._id;
         const canDelete = user && (String(authorId) === String(user._id) || user.role === 'admin');
-    
-        console.log({ canDelete, authorId, userId: user?._id, role: user?.role });
-    
+
+        console.log({ canDelete, authorId, userId: user?._id, role: user?.role, user });
+
         return `
             <div class="topic__comment comment" data-comment-id="${comment._id}" data-comment-author-id="${authorId}">
                 <img class="user-image user-image--alt" src="${comment.author.avatarUrl || '../assets/images/default-avatar.png'}" alt="user avatar">
@@ -71,35 +71,55 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <span class="like-count">${topic.likes.length}</span>
                     </button>
                 </h2>
+                <div class="card__tags">
+                    ${topic.tags?.map(tag => `<tag class="tag" title="${tag}">${tag}</tag>`).join('') || ''}
+                </div>
                 <p class="card__text">${topic.text}</p>
                 <div class="card__creator-info">
                     <img src="${topic.author?.avatarUrl || '../assets/images/default-avatar.png'}" alt="creator avatar" class="card__creator-avatar">
                     <p class="card__creator-username">${topic.author?.username || 'Unknown'}</p>
                     <p class="card__date">${date}</p>
-                    <button class="delete-topic-button visually-hidden" data-id="${topic._id}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash">
-                            <polyline points="3 6 5 6 21 6" />
-                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                            <path d="M10 11v6" />
-                            <path d="M14 11v6" />
-                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                        </svg>
-                    </button>
+                    <div class="card__edit-buttons">
+                        <button class="delete-topic-button visually-hidden" data-id="${topic._id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash">
+                                <polyline points="3 6 5 6 21 6" />
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                <path d="M10 11v6" />
+                                <path d="M14 11v6" />
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                            </svg>
+                        </button>
+                        ${isAuthor ? `
+                            <button class="edit-topic-button" data-id="${topic._id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                                    <path d="M12 20h9" />
+                                    <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                                </svg>
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </div>
         </div>
 
-        ${user ? `
-            <form class="topic__comment-create">
-                <textarea class="topic__textarea" placeholder="What do you think about it?" required></textarea>
-                <button class="button comment__button" type="submit">Send</button>
-            </form>
-        ` : `
-            <div class="not-auth-comment">
-                <p>You must <a href="/login">log in</a> to comment.</p>
-            </div>
-        `}
+        ${user ? (
+            user.isBanned ? `
+        <div class="not-auth-comment">
+            <p>Your account has been <strong>banned</strong>. You cannot leave comments.</p>
+        </div>
+    ` : `
+        <form class="topic__comment-create">
+            <textarea class="topic__textarea" placeholder="What do you think about it?" required></textarea>
+            <button class="button comment__button" type="submit">Send</button>
+        </form>
+    `
+        ) : `
+    <div class="not-auth-comment">
+        <p>You must <a href="/login">log in</a> to comment.</p>
+    </div>
+`}
 
         <div class="comments-section">
             ${comments.length ? comments.map(comment => renderComment(comment, user)).join('') : '<p>Here no comments yet</p>'}
@@ -135,13 +155,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     card.querySelectorAll('.delete-comment-button').forEach(btn => {
         btn.addEventListener('click', async () => {
             if (!confirm('Видалити цей коментар?')) return;
-    
+
             const commentId = btn.dataset.id;
             const res = await fetch(`/api/comments/${commentId}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
-    
+
             if (res.ok) {
                 btn.closest('.topic__comment').remove();
             } else {
@@ -176,10 +196,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Додавання коментаря
-    const form = document.querySelector('.topic__comment-create');
-    form?.addEventListener('submit', async (e) => {
+    const commentForm = document.querySelector('.topic__comment-create');
+    commentForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const textarea = form.querySelector('textarea');
+        const textarea = commentForm.querySelector('textarea');
         const text = textarea.value.trim();
         if (!text) return;
 
@@ -199,4 +219,83 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Помилка при додаванні коментаря');
         }
     });
+
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('.edit-topic-button')) {
+            const editorWrapper = document.createElement('div');
+            editorWrapper.classList.add('edit-form-wrapper');
+
+            editorWrapper.innerHTML = `
+            <form class="edit-topic-form">
+                <input type="text" name="title" class="edit-title-input" value="${topic.title}" required />
+                <input name="tags" class="edit-tags-input" value='${JSON.stringify((topic.tags || []).map(tag => ({ value: tag })))}' placeholder="Add tags" />
+                <div id="edit-editor" style="height: 200px;">${topic.text}</div>
+                <input type="hidden" name="text" id="edit-hidden-text" />
+                <label class="topic__checkbox">
+                    <input class="topic__checkbox-button visually-hidden" name="needHelp" type="checkbox" ${topic.needHelp ? 'checked' : ''}>
+                    Do you need any help with this? <span class="topic__checkbox-icon"></span>
+                </label>
+
+                <button type="submit" class="button">Зберегти</button>
+                <button type="button" class="button cancel-edit-button">Скасувати</button>
+            </form>
+        `;
+
+            const info = card.querySelector('.card__info');
+            info.innerHTML = '';
+            info.appendChild(editorWrapper);
+
+            const editQuill = new Quill('#edit-editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            const editForm = card.querySelector('.edit-topic-form');
+            const tagInput = editForm.querySelector('.edit-tags-input');
+            const tagify = new Tagify(tagInput, {
+                whitelist: [],
+                dropdown: {
+                    enabled: 0
+                }
+            });
+
+            // Сабміт редагування
+            editForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = editForm.querySelector('.edit-title-input').value.trim();
+                const needHelp = editForm.querySelector('[name="needHelp"]').checked;
+                const text = editQuill.root.innerHTML;
+                const tags = tagify.value.map(tag => tag.value);
+
+                const res = await fetch(`/api/topics/${topic._id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ title, text, needHelp, tags })
+                });
+
+                if (res.ok) {
+                    alert('Пост оновлено!');
+                    window.location.reload();
+                } else {
+                    const data = await res.json();
+                    alert(data.message || 'Помилка оновлення');
+                }
+            });
+
+            // Скасування
+            editForm.querySelector('.cancel-edit-button').addEventListener('click', () => {
+                window.location.reload();
+            });
+        }
+    });
 });
+
+

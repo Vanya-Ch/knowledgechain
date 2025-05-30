@@ -20,6 +20,7 @@ const upload = multer({ storage });
 router.post('/', auth, upload.single('image'), async (req, res) => {
   try {
     const { title, text, needHelp } = req.body;
+    const tags = JSON.parse(req.body.tags || '[]');
     const authorId = req.user._id;
     const now = new Date();
     const formattedDate = now.toLocaleDateString('en-GB', {
@@ -31,14 +32,15 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
     const imageUrl = req.file ? `../assets/uploads/topics/${req.file.filename}` : '';
 
     const topic = new Topic({
-        title,
-        text,
-        author: authorId,
-        createdAt: formattedDate,
-        imageUrl,
-        likes: [],
-        needHelp: needHelp === 'true'
-      });
+      title,
+      text,
+      author: authorId,
+      createdAt: formattedDate,
+      imageUrl,
+      likes: [],
+      needHelp: needHelp === 'true',
+      tags // додано
+    });
 
     await topic.save();
 
@@ -81,11 +83,11 @@ router.get('/myPosts', auth, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-      const topic = await Topic.findById(req.params.id).populate('author');
-      if (!topic) return res.status(404).json({ message: 'Topic not found' });
-      res.json(topic);
+    const topic = await Topic.findById(req.params.id).populate('author');
+    if (!topic) return res.status(404).json({ message: 'Topic not found' });
+    res.json(topic);
   } catch (err) {
-      res.status(500).json({ message: 'Error fetching topic' });
+    res.status(500).json({ message: 'Error fetching topic' });
   }
 });
 
@@ -116,7 +118,7 @@ router.post('/:id/like', auth, async (req, res) => {
   }
 });
 
-router.post('/liked',auth, async (req, res) => {
+router.post('/liked', auth, async (req, res) => {
   try {
     const { ids } = req.body;
 
@@ -135,22 +137,47 @@ router.post('/liked',auth, async (req, res) => {
   }
 });
 
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const { title, text, needHelp, tags } = req.body;
+    const topic = await Topic.findById(req.params.id);
+
+    if (!topic) return res.status(404).json({ message: 'Топік не знайдено' });
+
+    const isAuthor = topic.author.toString() === req.user._id.toString();
+    if (!isAuthor) {
+      return res.status(403).json({ message: 'Немає прав на редагування' });
+    }
+
+    topic.title = title;
+    topic.text = text;
+    topic.needHelp = needHelp === true || needHelp === 'true';
+    topic.tags = Array.isArray(tags) ? tags : [];
+
+    await topic.save();
+    res.json({ message: 'Топік оновлено успішно' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Помилка сервера' });
+  }
+});
+
 router.delete('/:id', auth, async (req, res) => {
   try {
-      const topic = await Topic.findById(req.params.id);
-      if (!topic) return res.status(404).json({ message: 'Топік не знайдено' });
+    const topic = await Topic.findById(req.params.id);
+    if (!topic) return res.status(404).json({ message: 'Топік не знайдено' });
 
-      const isAuthor = topic.author.toString() === req.user._id.toString();
-      const isAdmin = req.user.role === 'admin';
+    const isAuthor = topic.author.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin';
 
-      if (!isAuthor && !isAdmin) {
-          return res.status(403).json({ message: 'Немає прав на видалення' });
-      }
+    if (!isAuthor && !isAdmin) {
+      return res.status(403).json({ message: 'Немає прав на видалення' });
+    }
 
-      await topic.deleteOne();
-      res.json({ message: 'Топік видалено' });
+    await topic.deleteOne();
+    res.json({ message: 'Топік видалено' });
   } catch (err) {
-      res.status(500).json({ message: 'Помилка сервера' });
+    res.status(500).json({ message: 'Помилка сервера' });
   }
 });
 
