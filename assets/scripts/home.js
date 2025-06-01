@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tagFilterInput = document.getElementById('tag-filter');
     const tagFilter = new Tagify(tagFilterInput);
 
-    // Завантажити всі теги
     fetch('/api/tags')
         .then(res => res.json())
         .then(tags => tagFilter.settings.whitelist = tags);

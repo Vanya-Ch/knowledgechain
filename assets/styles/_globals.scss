@@ -118,8 +118,10 @@ button{
     position: static;
 }
 
-tags{
+tags.tagify{
     margin-top: rem(10);
+
+    position: static;
 
     &::placeholder{
         color: gray;

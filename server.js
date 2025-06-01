@@ -11,13 +11,10 @@ const checkBan = require('./middleware/checkBan.js');
 
 const app = express();
 
-
 const URL = "mongodb+srv://mrvanya383:banan231@diplomwork.rclhut9.mongodb.net/?retryWrites=true&w=majority&appName=DiplomWork";
 const PORT = 3000;
 
-
 require('dotenv').config();
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -26,8 +23,6 @@ app.use('/api', authRoutes);
 app.use('/api/user', avatarRoutes);
 app.use('/api/topics', topicRoutes);
 app.use('/api/comments', commentRoutes);
-
-
 
 mongoose
     .connect(URL)
@@ -38,15 +33,14 @@ app.listen(PORT, (err) => {
     err ? console.log(err) : console.log(`listening port ${PORT}`);
 });
 
-
 app.use('/assets', express.static(path.join(__dirname, 'assets')));  
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/home.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/create', auth, checkBan, (req, res) => {

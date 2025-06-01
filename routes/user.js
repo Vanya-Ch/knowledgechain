@@ -6,10 +6,8 @@ const fs = require('fs');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
-// ✅ Дозволені типи файлів
 const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
 
-// ✅ Налаштування з фільтром і лімітом розміру
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, '../assets/uploads/avatars'));
@@ -33,11 +31,10 @@ const upload = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5 MB
+    fileSize: 15 * 1024 * 1024, // 15 MB
   },
 });
 
-// 🖼️ POST /api/user/update-avatar
 router.post('/update-avatar', auth, upload.single('avatar'), async (req, res) => {
   try {
     if (!req.file) {
@@ -46,7 +43,6 @@ router.post('/update-avatar', auth, upload.single('avatar'), async (req, res) =>
 
     const user = await User.findById(req.user._id);
 
-    // 🧹 Видалення старого аватара (не дефолтного)
     if (user.avatarUrl && !user.avatarUrl.includes('default-avatar')) {
       const oldPath = path.join(__dirname, '..', user.avatarUrl.replace(/^\/?/, ''));
       if (fs.existsSync(oldPath)) {
@@ -54,7 +50,6 @@ router.post('/update-avatar', auth, upload.single('avatar'), async (req, res) =>
       }
     }
 
-    // ✅ Оновлення шляху нового аватара
     const ext = path.extname(req.file.originalname);
     const newFileName = `${req.user.username}-avatar${ext}`;
     const newAvatarPath = `/assets/uploads/avatars/${newFileName}`;
@@ -70,12 +65,10 @@ router.post('/update-avatar', auth, upload.single('avatar'), async (req, res) =>
   }
 });
 
-// 🧑‍💻 GET /api/user/me
 router.get('/me', auth, (req, res) => {
   res.json({ username: req.user.username, avatarUrl: req.user.avatarUrl });
 });
 
-// 🧑‍🤝‍🧑 GET /api/user/current
 router.get('/current', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id)
@@ -91,7 +84,6 @@ router.get('/current', auth, async (req, res) => {
   }
 });
 
-// 📋 GET /api/user/users
 router.get('/users', async (req, res) => {
   try {
     const users = await User.find({}, 'username role isBanned');
@@ -101,7 +93,6 @@ router.get('/users', async (req, res) => {
   }
 });
 
-// 🔒 PUT /api/user/:id/ban
 router.put('/:id/ban', async (req, res) => {
   const { id } = req.params;
   const { isBanned } = req.body;
@@ -115,7 +106,6 @@ router.put('/:id/ban', async (req, res) => {
   }
 });
 
-// 🛠️ Обробка Multer-винятків
 router.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     return res.status(400).json({ success: false, message: `Multer error: ${err.message}` });

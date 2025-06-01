@@ -458,13 +458,14 @@ button[aria-label]::before {
   position: static;
 }
 
-tags {
+tags.tagify {
   margin-top: 0.625rem;
+  position: static;
 }
-tags::-moz-placeholder {
+tags.tagify::-moz-placeholder {
   color: gray;
 }
-tags::placeholder {
+tags.tagify::placeholder {
   color: gray;
 }
 
@@ -1405,6 +1406,8 @@ tags::placeholder {
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+  padding: 0;
+  position: static !important;
 }
 .tagify__tag {
   max-width: 100%;

@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 
-// POST /api/register
 router.post('/register', async (req, res) => {
   const { username, name, password } = req.body;
 
@@ -28,14 +27,12 @@ router.post('/register', async (req, res) => {
 
     await newUser.save();
 
-    // створити токен
     const token = jwt.sign({ id: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-    // встановити токен в cookie
     res.cookie('token', token, {
       httpOnly: true,
       sameSite: 'Lax',
-      secure: false // true тільки з https
+      secure: false 
     });
 
     res.status(201).json({ message: 'Користувача створено' });
@@ -45,7 +42,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// routes/auth.js
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
   
@@ -64,13 +60,12 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Невірний пароль' });
       }
   
-      // Створення JWT
       const token = jwt.sign({ id: user._id, role: user.role , username: user.username, avatarUrl: user.avatarUrl, likedTopics: user.likedTopics, createdTopics: user.createdTopics}, process.env.JWT_SECRET, { expiresIn: '7d' });
   
       res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'Lax',
-        secure: false  // true лише для HTTPS
+        secure: false  
       });
   
       res.status(200).json({ message: 'Логін успішний' });
@@ -80,9 +75,8 @@ router.post('/login', async (req, res) => {
     }
   });
 
-  // GET /api/logout
 router.get('/logout', (req, res) => {
-  res.clearCookie('token'); // очищає токен
+  res.clearCookie('token');
   res.status(200).json({ message: 'Logged out' });
 });
 
