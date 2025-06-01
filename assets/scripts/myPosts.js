@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const likeCount = topic.likes.length;
 
                 const card = document.createElement('a');
+                card.setAttribute('target', "_blank")
                 card.href = `/topic?id=${topic._id}`;
                 card.className = 'card-link card';
                 card.dataset.topicId = topic._id;

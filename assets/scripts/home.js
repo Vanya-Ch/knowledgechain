@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         currentTopics.forEach(topic => {
             const card = document.createElement('a');
+            card.setAttribute('target', "_blank")
             card.href = `/topic?id=${topic._id}`;
             card.className = 'card-link card';
             card.dataset.topicId = topic._id;

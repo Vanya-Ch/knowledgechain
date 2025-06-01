@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const isAuthorOrAdmin = topic.author?._id === user._id || user.role === 'admin';
 
                 const card = document.createElement('a');
+                card.setAttribute('target', "_blank")
                 card.href = `/topic?id=${topic._id}`;
                 card.className = 'card-link card';
                 card.dataset.topicId = topic._id;
